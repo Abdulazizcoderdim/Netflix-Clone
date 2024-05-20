@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import { createContext, useContext, useState } from 'react'
 import { AccountProps, ChildProps, ContextType } from '@/types'
@@ -11,7 +11,7 @@ const GlobalContext = ({ children }: ChildProps) => {
   return (
     <Context.Provider value={{ account, setAccount }}>
       {children}
-    </Context.Provider>
+   </Context.Provider>
   )
 }
 
@@ -25,3 +25,4 @@ export const useGlobalContext = () => {
 
   return context
 }
+//1:05:00
