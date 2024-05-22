@@ -20,7 +20,7 @@ export const connectToDB = async () => {
         }
 
         await mongoose.connect(process.env.MONGODB_URL, options);
-        
+
         isConnected = true;
         console.log("MongoDB ulandi ✅");
     } catch (error) {
