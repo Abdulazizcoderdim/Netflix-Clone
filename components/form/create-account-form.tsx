@@ -1,5 +1,5 @@
 import { createAccountSchema } from '@/lib/validation'
-import React from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -15,8 +15,18 @@ import {
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import PinInput from 'react-pin-input'
+import axios from 'axios'
+import { AccountProps, AccountResponse } from '@/types'
+import { toast } from '@/components/ui/use-toast'
 
-const CreateAccountForm = () => {
+interface Props {
+  uid: string,
+  setOpen: Dispatch<SetStateAction<boolean>>
+  setAccount: Dispatch<SetStateAction<AccountProps[]>>
+  account: AccountProps[]
+}
+
+const CreateAccountForm = ({uid, setOpen,setAccount,account}: Props) => {
   const form = useForm<z.infer<typeof createAccountSchema>>({
     resolver: zodResolver(createAccountSchema),
     defaultValues: {
@@ -28,7 +38,30 @@ const CreateAccountForm = () => {
   const { isValid, isSubmitting } = form.formState
 
   async function onSubmit(values: z.infer<typeof createAccountSchema>) {
-    console.log(values)
+      try {
+        const {data} = await axios.post<AccountResponse>('/api/account', {...values, uid})
+        if(data.success){
+          setOpen(false)
+          form.reset()
+          setAccount([...account,data.data as AccountProps])
+          return toast({
+            title: 'Account created successfully',
+            description: 'Your account has been created successfully. You can now login.',
+          })    
+        }else{
+          return toast({
+            title: "Error",
+            description: data.message,
+            variant: "destructive",
+          })
+        }
+      } catch (error) {
+          return toast({
+            title: "Error",
+            description: "Something went wrong. Please try again later.",
+            variant: "destructive",
+          })
+      }
   }
 
   return (
@@ -117,3 +150,4 @@ const CreateAccountForm = () => {
 }
 
 export default CreateAccountForm
+
