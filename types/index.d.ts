@@ -22,5 +22,9 @@ export interface AxiosResponse {
 }
 
 export interface AccountResponse extends AxiosResponse {
+<<<<<<< HEAD
     data: AccountProps[] | AccountProps
+=======
+    data: AccountProps[]
+>>>>>>> 2a052f97ffa720dd248161555dc4409ce06c726f
 }
