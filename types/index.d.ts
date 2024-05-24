@@ -3,6 +3,8 @@ import { Dispatch, ReactNode, SetStateAction } from "react";
 export interface ContextType {
     account: AccountProps | null,
     setAccount: Dispatch<SetStateAction<AccountProps | null>> 
+    pageLoader: boolean
+    setPageLoader: Dispatch<SetStateAction<boolean>>
 }
 
 export interface AccountProps {
