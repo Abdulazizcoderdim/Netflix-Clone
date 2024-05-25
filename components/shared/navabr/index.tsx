@@ -13,6 +13,7 @@ import { useGlobalContext } from '@/context'
 import { Button } from '@/components/ui/button'
 import { signOut } from 'next-auth/react'
 import { useState } from 'react'
+import SearchBar from './search-bar'
 
 const Navbar = () => {
   const { account, setAccount } = useGlobalContext()
@@ -26,7 +27,7 @@ const Navbar = () => {
 
   return (
     <div className="relative">
-      <header className="header md:px-10 px-5 py-4">
+      <header className="header md:px-10 px-5 py-4 hover:bg-black transition-all duration-100">
         <div className="flex items-center h-full space-x-2 md:space-x-10">
           <Image
             src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
@@ -48,11 +49,14 @@ const Navbar = () => {
         </div>
 
         <div className="font-light flex items-center space-x-4 text-sm">
-         {showSearchBar ? (
-
-         ) : (
-           <AiOutlineSearch className="hidden sm:inline sm:w-6 sm:h-6 cursor-pointer" />
-         )}
+          {showSearchBar ? (
+            <SearchBar setShowSearchBar={setShowSearchBar} />
+          ) : (
+            <AiOutlineSearch
+              onClick={() => setShowSearchBar((prev) => !prev)}
+              className="hidden sm:inline sm:w-6 sm:h-6 cursor-pointer"
+            />
+          )}
 
           <Popover>
             <PopoverTrigger>
@@ -81,4 +85,3 @@ const Navbar = () => {
 }
 
 export default Navbar
-
