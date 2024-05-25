@@ -1,5 +1,6 @@
 'use client'
 
+import Common from '@/components/shared/common'
 import Loader from '@/components/shared/loader'
 import Login from '@/components/shared/login'
 import ManageAccount from '@/components/shared/manage-account'
@@ -18,8 +19,7 @@ const Page = () => {
   if (account === null) return <ManageAccount />
   // if(pageLoader) return <Loader/>
 
-  return <div>Browse Page</div>
+  return <Common/>
 }
 
 export default Page
-//3:12:00

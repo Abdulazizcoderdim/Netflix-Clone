@@ -26,3 +26,9 @@ export interface AxiosResponse {
 export interface AccountResponse extends AxiosResponse {
     data: AccountProps[] | AccountProps
 }
+
+export interface MenuItemProps {
+    id: string
+    title: string
+    path: string
+}

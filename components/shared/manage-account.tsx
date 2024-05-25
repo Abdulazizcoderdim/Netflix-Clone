@@ -11,8 +11,7 @@ import { AccountProps, AccountResponse } from '@/types'
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
 import { toast } from '@/components/ui/use-toast'
-import { useGlobalContext } from '@/context'
-import { Skeleton } from '../ui/skeleton'
+import Loader from './loader'
 
 const ManageAccount = () => {
   const [isDelete, setIsDelete] = useState<boolean>(
@@ -84,6 +83,8 @@ const ManageAccount = () => {
     }
   }
 
+  if(isLoading) return <Loader/>
+
   return (
     <div className="min-h-screen flex justify-center flex-col items-center relative">
       <div className="flex justify-center flex-col items-center">
@@ -92,13 +93,7 @@ const ManageAccount = () => {
         </h1>
 
         <ul className="flex flex-wrap justify-center gap-4 p-0 my-12">
-          {!isLoading ? (
-            [1, 2, 3, 4].map((_, i) => (
-              <>
-                <Skeleton className="max-w-[200px] h-[250px] w-[155px] cursor-pointer flex flex-col items-center gap-3 min-w-[200px]" />
-              </>
-            ))
-          ) : (
+          {isLoading ? null : (
             <>
               {account &&account.map((account: AccountProps) => (
                 <li
