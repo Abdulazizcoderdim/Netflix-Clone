@@ -10,6 +10,6 @@ export const getTrendingMoview = async (type: string) => {
     )
     return data
   } catch (error) {
-    console.log(error)
+    console.log("APi ishlamaddiddiidid",error)
   }
 }
