@@ -8,8 +8,9 @@ export const getTrendingMoview = async (type: string) => {
     const { data } = await axios.get(
       `${BASE_URL}/trending/${type}/day?api_key=${API_KEY}`
     )
-    return data
+    return data && data.results
   } catch (error) {
-    console.log("APi ishlamaddiddiidid",error)
+    console.log('APi ishlamaddiddiidid', error)
   }
 }
+//3:46:00

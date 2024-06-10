@@ -15,9 +15,13 @@ const Page = () => {
 
   useEffect(() => {
     const getAllMovies = async () => {
-      const trendingMovies = await getTrendingMoview("movie")
-
-      console.log(trendingMovies)
+      const [trendingMovies, trendingTv] = await Promise.all([
+        getTrendingMoview("movie"),
+        getTrendingMoview("tv")
+      ])
+ 
+      console.log("MOVIE", trendingMovies)
+      console.log("TV", trendingTv)
     }
 
     setPageLoader(false)
